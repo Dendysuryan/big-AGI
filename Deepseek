@@ -1,17 +1,11 @@
-import OpenAI from "openai";
-
-const openai = new OpenAI({
-        baseURL: 'https://api.deepseek.com',
-        apiKey: '<DeepSeek API Key>'
-});
-
-async function main() {
-  const completion = await openai.chat.completions.create({
-    messages: [{ role: "system", content: "You are a helpful assistant." }],
-    model: "deepseek-chat",
-  });
-
-  console.log(completion.choices[0].message.content);
-}
-
-main();
+curl https://api.deepseek.com/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <DeepSeek API Key>" \
+  -d '{
+        "model": "deepseek-chat",
+        "messages": [
+          {"role": "system", "content": "You are a helpful assistant."},
+          {"role": "user", "content": "Hello!"}
+        ],
+        "stream": true
+      }
